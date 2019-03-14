@@ -1,5 +1,45 @@
 $(document).ready(function() {
 
+  /* game */
+
+
+  /* au clic sur start */
+  $(".start_btn").click(function() {
+    /* ajoute un bullet */
+    $( ".game_background" ).append('<div class="meteor meteor_move"></div>'); 
+    /* trouve la height du game_background */
+    var backgroundHeight = $(".game_background").height();    
+    /* produis un nombre aléatoire compris entre un min et un max */
+    function getRandomInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1) + min);
+    }
+    /* donne ce nombre aléatoire en margin top au meteor, avec un max égal à la hauteur de game_background */
+    $('.meteor').each(function(){
+      $(this).css({'marginTop' : getRandomInt(1,backgroundHeight), 'marginLeft': '1vw'});
+    });
+    /* stop displaying start button */
+    $('.start_btn').hide(); 
+    
+    
+    setInterval(function(){ 
+      $( ".game_background" ).append('<div class="meteor meteor_move"></div>'); 
+      $('.meteor').each(function(){
+        $(this).css({'marginTop' : getRandomInt(1,backgroundHeight)});
+      });
+    }, 3000);
+  });
+
+  
+
+
+  
+
+
+
+
+
+  /* cards */
+
     $(".parent1").click(function() {
         $( ".parent1" ).addClass("turnTopCard");
         $( ".card_content1" ).addClass("turnBottomCard");

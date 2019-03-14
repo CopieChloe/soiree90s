@@ -160,3 +160,64 @@ html {
       transition: all 1s;
   }
 
+.game_container {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game_background {
+    background-color: black;
+    height: 90vh;
+    width: 90vw;
+    overflow: hidden;
+    position: relative;
+}
+
+.rocket_container {
+    position: absolute;
+    height: 8vh;
+    width: 6vw;
+    margin-top: 42vh;
+    margin-left: 20vw;
+    display: flex;
+    align-items: center;
+}
+
+.rocket_container>img {
+    height: 8vh;
+    width: 5vw;
+    transform: rotate(90deg);
+}
+
+.bullet {
+    height: 4px;
+    width: 4px;
+    background-color: red;
+}
+
+.meteor {
+    height: 4px;
+    width: 4px;
+    background-color: white;
+    position: absolute;
+    right: 0;
+}
+
+@keyframes meteorMove {
+    from {
+      transform: translateX(0);
+      display: block;
+    }
+  
+    to {
+        transform: translateX(-92vw);
+        display: none;
+    }
+  }
+
+.meteor_move {
+    animation: meteorMove 3s linear 100ms 1 normal forwards;
+}
