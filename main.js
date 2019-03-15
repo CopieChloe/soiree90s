@@ -5,7 +5,7 @@ $(document).ready(function() {
 
   /* au clic sur start */
   $(".start_btn").click(function() {
-    /* ajoute un bullet */
+    /* ajoute une meteor */
     $( ".game_background" ).append('<div class="meteor meteor_move"></div>'); 
     /* trouve la height du game_background */
     var backgroundHeight = $(".game_background").height();    
@@ -20,13 +20,98 @@ $(document).ready(function() {
     /* stop displaying start button */
     $('.start_btn').hide(); 
     
-    /* send a meteor every 3 seconds */
+    /* send a meteor every 3 seconds 
+
     setInterval(function(){ 
+        
       $( ".game_background" ).append('<div class="meteor meteor_move"></div>'); 
       $('.meteor').each(function(){
         $(this).css({'marginTop' : getRandomInt(1,backgroundHeight)});
       });
-    }, 3000);
+    }, 3000);   */
+
+    function sendMeteors(){
+      var sendOne = function(){
+        var r = $.Deferred();
+      
+      /* create and style meteor */
+      $( ".game_background" ).append('<div class="meteor meteor_move"></div>'); 
+      $('.meteor').css({'marginTop' : getRandomInt(1,backgroundHeight)});
+
+      /* show meteor offset left every second */
+      setInterval(function(){ 
+        var offset = $('.meteor').offset();
+        var offsetLeft = offset.left;
+        var offsetTop = offset.top;
+        
+        var rocket = $(".rocket_container");
+        var rocketOffset = $('.rocket_container').offset();
+        var rocketOffsetLeft = rocketOffset.left;
+        var rocketOffsetTop = rocketOffset.top; /* 918 */
+        var rocketOffsetBottom = rocketOffsetTop + rocket.outerHeight(); /* 968 */       
+
+        if (offsetTop > rocketOffsetTop && offsetTop < rocketOffsetBottom && offsetLeft < rocketOffsetLeft) {
+          console.log('GAME OVER');
+        }    
+        
+      }, 1000); 
+
+      return r; 
+      }
+
+      var destroyOne = function() {
+        setTimeout(function(){       
+          $('.meteor').remove();
+          console.log('meteor one is removed');      
+        }, 5000);
+      }
+
+      sendOne().done( destroyOne() );   
+
+      x = setTimeout(function(){sendMeteors()}, 5000);
+    }
+
+    sendMeteors();   
+  
+
+    var functionOne = function() {
+ 
+      var r = $.Deferred();
+
+      setTimeout(function(){         
+        
+        setInterval(function(){ 
+        
+          $( ".game_background" ).append('<div class="meteor meteor_move"></div>'); 
+
+          var offset = $('.meteor').offset();
+          var offsetLeft = offset.left;
+          var offsetTop = offset.top; 
+
+
+          $('.meteor').each(function(){
+            $(this).css({'marginTop' : getRandomInt(1,backgroundHeight)});
+            console.log('Function One' + offsetLeft);
+          });
+
+         
+        }, 3000); 
+      }, 1000);   
+    
+      return r; 
+    };
+ 
+    var functionTwo = function() {
+      setTimeout(function(){         
+        console.log('Function Two');
+        $('.meteor').each(function(){
+          $(this).remove();
+        });
+      }, 3000);     
+    };
+ 
+  // Now call the functions one after the other using the done method
+  /* functionOne().done( functionTwo() ); */ 
 
     /* make rocket playable */
     $(document).keydown(function(event) {  
@@ -56,14 +141,6 @@ $(document).ready(function() {
       var meteorOffsetLeft = meteorOffset.left;
       var meteorOffsetBottom = meteorOffsetTop + meteor.outerHeight();
 
-    
-      
-
-     
-
-     
-
-
       /* up key */
       if (key == '38') {
           $('.rocket_container').css("margin-top", "-=15");
@@ -87,34 +164,32 @@ $(document).ready(function() {
         if (rocketOffsetTop > containerOffsetBottom) {
           console.log('put game over here BOTTOM');
         }
-
-        if ( rocketOffsetTop > meteorOffsetTop > rocketOffsetBottom ) {
-          console.log('GAME OVER');
-        }
-
-
-
-        
-      }); 
-
-
-
-      
-
-   
-   
-      
-      
-
-      
     
+      });      
+      
+      /*
+
+      setInterval(function(){
+        var rocket = $('.rocket_container');
+        var rocketOffset = $('.rocket_container').offset();
+        var rocketOffsetLeft = rocketOffset.left;
+        var rocketOffsetTop = rocketOffset.top;   
+
+        var topOfZone = rocketOffsetTop - 30; 
+        var bottomOfZone = rocketOffsetTop + 30;   
+
+        var meteorOffset = $('.meteor').offset();
+        var meteorOffsetTop = meteorOffset.top;
+        
+        
+        }, 1000);
+
+        */
+
+      
+        
    
-  });
-
-  
-
-
-  
+  }); 
 
 
 

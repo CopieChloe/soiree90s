@@ -184,6 +184,7 @@ html {
     margin-left: 20vw;
     display: flex;
     align-items: center;
+    
 }
 
 .rocket_container>img {
@@ -197,6 +198,14 @@ html {
     width: 4px;
     background-color: red;
     opacity: 0;
+}
+
+.meteor_container {
+    position: absolute;
+    height: 90vh;
+    width: 62vw;
+    left: 6vw;
+    padding: 0;
 }
 
 .meteor {
@@ -220,7 +229,7 @@ html {
   }
 
 .meteor_move {
-    animation: meteorMove 3s linear 100ms 1 normal forwards;
+    animation: meteorMove 5s linear 100ms 1 normal forwards;
 }
 
 @keyframes bulletMove {
