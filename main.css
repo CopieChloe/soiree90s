@@ -168,6 +168,84 @@ html {
     align-items: center;
 }
 
+.game_over_screen {
+    background-color: black;
+    height: 90vh;
+    width: 90vw;
+    margin-left: 5vw;
+    margin-top: 5vh;
+    overflow: hidden;
+    position: relative;
+    display: none;
+}
+
+.game_over_text {
+    color: red;
+    background-color: yellow;
+    border: 3px solid red;
+    border-radius: 20px;
+    width: 50%;
+    margin-left: 25%;
+    height: 20vh;
+    margin-top: 30vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+    font-family: 'VT323', monospace;
+    animation: pulse 1s linear 10ms infinite normal forwards;
+}
+
+@-webkit-keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  
+  @keyframes pulse {
+    from {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  
+    50% {
+      -webkit-transform: scale3d(1.05, 1.05, 1.05);
+      transform: scale3d(1.05, 1.05, 1.05);
+    }
+  
+    to {
+      -webkit-transform: scale3d(1, 1, 1);
+      transform: scale3d(1, 1, 1);
+    }
+  }
+
+.btn_start_again_container {
+    margin-top: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn_start_again_container>.try_again_btn {
+    border: 2px solid red;
+    background-color: yellow;
+    color: red;
+    border-radius: 10px;
+    font-size: 2rem;
+    font-family: 'VT323', monospace;
+}
+
 .game_background {
     background-color: black;
     height: 90vh;

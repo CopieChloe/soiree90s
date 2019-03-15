@@ -2,7 +2,6 @@ $(document).ready(function() {
 
   /* game */
 
-
   /* au clic sur start */
   $(".start_btn").click(function() {
     /* ajoute une meteor */
@@ -52,6 +51,8 @@ $(document).ready(function() {
 
         if (offsetTop > rocketOffsetTop && offsetTop < rocketOffsetBottom && offsetLeft < rocketOffsetLeft) {
           console.log('GAME OVER');
+         $('.game_container').hide();
+         $('.game_over_screen').show();
         }    
         
       }, 1000); 
@@ -61,8 +62,7 @@ $(document).ready(function() {
 
       var destroyOne = function() {
         setTimeout(function(){       
-          $('.meteor').remove();
-          console.log('meteor one is removed');      
+          $('.meteor').remove();     
         }, 5000);
       }
 
@@ -72,46 +72,6 @@ $(document).ready(function() {
     }
 
     sendMeteors();   
-  
-
-    var functionOne = function() {
- 
-      var r = $.Deferred();
-
-      setTimeout(function(){         
-        
-        setInterval(function(){ 
-        
-          $( ".game_background" ).append('<div class="meteor meteor_move"></div>'); 
-
-          var offset = $('.meteor').offset();
-          var offsetLeft = offset.left;
-          var offsetTop = offset.top; 
-
-
-          $('.meteor').each(function(){
-            $(this).css({'marginTop' : getRandomInt(1,backgroundHeight)});
-            console.log('Function One' + offsetLeft);
-          });
-
-         
-        }, 3000); 
-      }, 1000);   
-    
-      return r; 
-    };
- 
-    var functionTwo = function() {
-      setTimeout(function(){         
-        console.log('Function Two');
-        $('.meteor').each(function(){
-          $(this).remove();
-        });
-      }, 3000);     
-    };
- 
-  // Now call the functions one after the other using the done method
-  /* functionOne().done( functionTwo() ); */ 
 
     /* make rocket playable */
     $(document).keydown(function(event) {  
@@ -154,46 +114,55 @@ $(document).ready(function() {
           $( ".rocket_container" ).append('<div class="bullet"></div>'); 
           $('.bullet').each(function(){
             $(this).addClass('fire');
+
+          var offset = $('.meteor').offset();
+          var offsetLeft = offset.left;
+          var offsetTop = offset.top;
+          var topOfZone = offsetTop -30;
+          var bottomOfZone = offsetTop + 30;
+
+          var bulletOffset = $('.bullet').offset();
+          var bulletOffsetTop = bulletOffset.top;
+          var bulletOffsetLeft = bulletOffset.left;
+          var topOfBulletZone = bulletOffsetTop -30;
+          var bottomOfBulletZone = bulletOffsetTop + 30;
+
+          console.log(topOfZone, bulletOffsetTop, bottomOfZone);
+
+          /* si l'offset top du bullet se trouve entre topofzone et bottomofzone */
+
+          if (bulletOffsetTop > topOfZone && bulletOffsetTop < bottomOfZone) {
+            console.log('hurray');
+          }
+
+          /*
+          if (offsetLeft == bulletOffsetLeft && offsetTop == bulletOffsetTop) {
+            console.log('explode');
+          }
+          */
           });
         } 
 
         if (rocketOffsetTop < containerOffsetTop) {
-          console.log('put game over here TOP');
+          $('.game_container').hide();
+         $('.game_over_screen').show();
         }
 
         if (rocketOffsetTop > containerOffsetBottom) {
-          console.log('put game over here BOTTOM');
+          $('.game_container').hide();
+         $('.game_over_screen').show();
         }
     
       });      
-      
-      /*
-
-      setInterval(function(){
-        var rocket = $('.rocket_container');
-        var rocketOffset = $('.rocket_container').offset();
-        var rocketOffsetLeft = rocketOffset.left;
-        var rocketOffsetTop = rocketOffset.top;   
-
-        var topOfZone = rocketOffsetTop - 30; 
-        var bottomOfZone = rocketOffsetTop + 30;   
-
-        var meteorOffset = $('.meteor').offset();
-        var meteorOffsetTop = meteorOffset.top;
-        
-        
-        }, 1000);
-
-        */
-
-      
-        
+  
    
   }); 
 
-
-
-
+  $('.try_again_btn').click(function(){
+    
+    $('.game_container').show();
+    $('.game_over_screen').hide();
+  });
 
   /* cards */
 
